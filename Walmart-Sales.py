@@ -15,6 +15,16 @@ performance = sales_data.groupby(['City', 'Branch']).agg({'Total': 'sum'})
 print(performance)
 
 # B. What is the average price of an item sold at each branch of the city (10 marks)
-print("Average Data")
 average_price = sales_data.groupby(['City', 'Branch'])['Unit price'].mean()
-print(average_price)
+print("\nAverage Data\n", average_price)
+
+# C. Analyze the performance of sales and revenue, Month over Month across the Product line, Gender, and Payment Method, and identify the focus areas to get better sales for April 2019. 
+sales_data['Date'] = pd.to_datetime(sales_data['Date'])
+
+april_data = sales_data[(sales_data['Date'].dt.month == 4) & (sales_data['Date'].dt.year == 2019)]
+
+ap_data = april_data.groupby(['Product line', 'Gender', 'Payment']).agg({'Total': 'sum'}).reset_index()
+
+ap_data['Revenue'] = ap_data['Total'] * 0.1  # Assuming a revenue rate of 10% for simplicity
+
+print("\nApril Data\n", ap_data)
