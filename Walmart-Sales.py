@@ -12,11 +12,11 @@ sales_csv = pd.read_csv(csv_file)
 # A. Analyze the performance of sales and revenue at the city and branch level
 sales_data['Total'] = sales_data['Unit price'] * sales_data['Quantity']
 performance = sales_data.groupby(['City', 'Branch']).agg({'Total': 'sum'})
-print(performance)
+print("\n performance of sales and revenue at the city and branch level\n", performance)
 
-# B. What is the average price of an item sold at each branch of the city (10 marks)
+# B. What is the average price of an item sold at each branch of the city 
 average_price = sales_data.groupby(['City', 'Branch'])['Unit price'].mean()
-print("\nAverage Data\n", average_price)
+print("\nAverage Price\n", average_price)
 
 # C. Analyze the performance of sales and revenue, Month over Month across the Product line, Gender, and Payment Method, and identify the focus areas to get better sales for April 2019. 
 sales_data['Date'] = pd.to_datetime(sales_data['Date'])
